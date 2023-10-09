@@ -4,7 +4,9 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Models\Usuario;
+use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
@@ -28,6 +30,7 @@ class RegisterController extends Controller
      *
      * @var string
      */
+    protected $redirectTo = RouteServiceProvider::HOME;
 
 
     /**
@@ -42,7 +45,13 @@ class RegisterController extends Controller
     public function store(){
         $data = request()->all();
         $usuario = $this->create($data);
-        $this->redirectTo = route('');
+
+        if (Auth::check()) {
+            return redirect('/');
+        } else {
+            Auth::login($usuario);
+        }
+        return redirect('/');
     }
     /**
      * Get a validator for an incoming registration request.

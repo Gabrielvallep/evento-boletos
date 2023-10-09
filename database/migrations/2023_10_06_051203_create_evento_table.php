@@ -18,7 +18,6 @@ return new class extends Migration
             $table->string('evento', 200);
             $table->date('fecha');
             $table->integer('capacidad')->nullable();
-            $table->integer('id_evento_zona')->nullable()->default(1);
         });
     }
 
