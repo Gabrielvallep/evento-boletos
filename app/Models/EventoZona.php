@@ -10,12 +10,12 @@ use Illuminate\Database\Eloquent\Model;
 
 /**
  * Class EventoZona
- * 
+ *
  * @property int $id
  * @property int $id_evento
  * @property int $id_zona_formato
  * @property float $precio
- * 
+ *
  * @property Evento $evento
  * @property ZonaFormato $zona_formato
  *
@@ -43,8 +43,9 @@ class EventoZona extends Model
 		return $this->belongsTo(Evento::class, 'id_evento');
 	}
 
-	public function zona_formato()
-	{
-		return $this->belongsTo(ZonaFormato::class, 'id_zona_formato');
-	}
+
+    public function boletos()
+    {
+        return $this->hasMany(Boleto::class, 'id_evento_zona');
+    }
 }

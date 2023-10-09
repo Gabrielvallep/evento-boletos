@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('boleto', function (Blueprint $table) {
             $table->integer('id', true);
             $table->dateTime('fecha');
-            $table->integer('id_evento_formato')->index('boleto_evento_id_evento_fk');
+            $table->integer('id_evento_zona')->index('boleto_evento_id_evento_fk');
             $table->integer('id_asiento')->index('boleto_asiento_id_evento_fk');
             $table->boolean('estado');
         });
