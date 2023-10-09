@@ -12,13 +12,13 @@ use Illuminate\Database\Eloquent\Model;
 
 /**
  * Class Boleto
- * 
+ *
  * @property int $id
  * @property Carbon $fecha
  * @property int $id_evento_formato
  * @property int $id_asiento
  * @property bool $estado
- * 
+ *
  * @property Asiento $asiento
  * @property Evento $evento
  * @property Collection|Reserva[] $reservas
@@ -32,14 +32,14 @@ class Boleto extends Model
 
 	protected $casts = [
 		'fecha' => 'datetime',
-		'id_evento_formato' => 'int',
+		'id_evento_zona' => 'int',
 		'id_asiento' => 'int',
 		'estado' => 'bool'
 	];
 
 	protected $fillable = [
 		'fecha',
-		'id_evento_formato',
+		'id_evento_zona',
 		'id_asiento',
 		'estado'
 	];
@@ -51,7 +51,7 @@ class Boleto extends Model
 
 	public function evento()
 	{
-		return $this->belongsTo(Evento::class, 'id_evento_formato');
+		return $this->belongsTo(Evento::class, 'id_evento_zona');
 	}
 
 	public function reservas()

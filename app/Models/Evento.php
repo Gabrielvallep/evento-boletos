@@ -12,13 +12,13 @@ use Illuminate\Database\Eloquent\Model;
 
 /**
  * Class Evento
- * 
+ *
  * @property int $id
  * @property string $evento
  * @property Carbon $fecha
  * @property int|null $capacidad
  * @property int|null $id_evento_zona
- * 
+ *
  * @property Collection|Boleto[] $boletos
  * @property Collection|EventoZona[] $evento_zonas
  *
@@ -38,14 +38,8 @@ class Evento extends Model
 	protected $fillable = [
 		'evento',
 		'fecha',
-		'capacidad',
-		'id_evento_zona'
+		'capacidad'
 	];
-
-	public function boletos()
-	{
-		return $this->hasMany(Boleto::class, 'id_evento_formato');
-	}
 
 	public function evento_zonas()
 	{
