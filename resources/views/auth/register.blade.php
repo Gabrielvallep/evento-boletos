@@ -33,7 +33,7 @@
                                                    class="form-control @error('nombre') is-invalid @enderror"
                                                    name="nombre" value="{{ old('nombre') }}" id="nombre"
                                                    placeholder="Ingrese el nombre" required>
-                                            @error('name')
+                                            @error('nombre')
                                             <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
                                                 </span>
@@ -49,7 +49,7 @@
                                             <input type="text" class="form-control @error('email') is-invalid @enderror"
                                                    name="email" value="{{ old('email') }}" id="email"
                                                    placeholder="Ingrese el correo" required>
-                                            @error('name')
+                                            @error('email')
                                             <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
                                                 </span>
@@ -137,6 +137,9 @@
 
 @endsection
 @section('script')
+    <script src="{{ URL::asset('build/js/pages/form-validation.init.js') }}"></script>
     <script src="{{ URL::asset('build/js/pages/form-wizard.init.js') }}"></script>
     <script src="{{ URL::asset('build/js/app.js') }}"></script>
+    <script src="{{ URL::asset('build/libs/particles.js/particles.js') }}"></script>
+
 @endsection
