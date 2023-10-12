@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::table('formato', function (Blueprint $table) {
-            $table->foreign(['id_auditorio'], 'formato_auditorio_id_auditorio_fk')->references(['id'])->on('auditorio')->onUpdate('NO ACTION')->onDelete('NO ACTION');
+            $table->foreign(['id_escenario'], 'formato_escenario_id_escenario_fk')->references(['id'])->on('escenario')->onUpdate('NO ACTION')->onDelete('NO ACTION');
         });
     }
 
@@ -26,7 +26,7 @@ return new class extends Migration
     public function down()
     {
         Schema::table('formato', function (Blueprint $table) {
-            $table->dropForeign('formato_auditorio_id_auditorio_fk');
+            $table->dropForeign('formato_escenario_id_escenario_fk');
         });
     }
 };

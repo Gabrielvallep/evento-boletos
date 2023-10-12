@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Rol;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -18,10 +19,11 @@ return new class extends Migration
             $table->string('nombre', 100);
             $table->tinyInteger('estado')->nullable()->default(1);
         });
-        \App\Models\Rol::create([
+        Rol::create([
             'nombre' => 'Administrador',
             'estado' => 1
         ]);
+
     }
 
     /**

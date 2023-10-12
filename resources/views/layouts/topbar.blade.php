@@ -264,13 +264,13 @@
                         </div>
                     </div>
                 </div>
-
+                @if ($user==null|| $user->rol->nombre == 'Administrador')
                 <div class="ms-1 header-item d-none d-sm-flex">
                     <a type="button" class="btn btn-icon btn-topbar"  href="{{ route('register') }}">
                         <i class='bx bx-user fs-22' href="{{ route('register') }}"></i>
                     </a>
                 </div>
-
+                @endif
                 <div class="dropdown ms-sm-3 header-item topbar-user">
                     <button type="button" class="btn shadow-none" id="page-header-user-dropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <span class="d-flex align-items-center">

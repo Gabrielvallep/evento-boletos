@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\Rol;
 use App\Models\Usuario;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\RegistersUsers;
@@ -32,7 +33,11 @@ class RegisterController extends Controller
      */
     protected $redirectTo = RouteServiceProvider::HOME;
 
-
+    public function showRegistrationForm()
+    {
+        $roles = Rol::all();
+        return view('auth.register', compact('roles'));
+    }
     /**
      * Create a new controller instance.
      *
@@ -44,11 +49,9 @@ class RegisterController extends Controller
     }
     public function store(){
         $data = request()->all();
+        $data['rol_id'] = $data['rol_id'] ?? 3;
         $usuario = $this->create($data);
-
-        if (Auth::check()) {
-            return redirect('/');
-        } else {
+        if (!Auth::check()) {
             Auth::login($usuario);
         }
         return redirect('/');
@@ -85,7 +88,7 @@ class RegisterController extends Controller
             'password' => Hash::make($data['password']),
             'dui' => $data['dui'],
             'telefono' => $data['telefono'],
-            'id_rol' => '1',
+            'id_rol' => $data['rol_id'],
         ]);
     }
 }

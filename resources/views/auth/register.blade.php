@@ -11,7 +11,9 @@
             Registrarse
         @endslot
     @endcomponent
-
+    @php
+        $user = Auth::user();
+    @endphp
     <div class="row">
 
         <div class="col-xl-12">
@@ -46,7 +48,7 @@
                                     </div>
                                     <div class="col-lg-6">
                                         <div class="form-floating">
-                                            <input type="text" class="form-control @error('email') is-invalid @enderror"
+                                            <input type="email" class="form-control @error('email') is-invalid @enderror"
                                                    name="email" value="{{ old('email') }}" id="email"
                                                    placeholder="Ingrese el correo" required>
                                             @error('email')
@@ -104,7 +106,7 @@
                                         <div class="form-floating">
                                             <input type="text" class="form-control @error('telefono') is-invalid @enderror"
                                                    name="telefono" value="{{ old('telefono') }}" id="telefono"
-                                                   placeholder="Ingrese el telefono" required>
+                                                   placeholder="(xxx)xxxX-xxxx" required>
                                             @error('telefono')
 
                                             @enderror
@@ -114,14 +116,27 @@
                                             <label for="telefono"><span class="text-danger">*</span>Telefono</label>
                                         </div>
                                     </div>
+                                    @if ($user && $user->rol->nombre == 'Administrador')
+                                        <div class="col-lg-6">
+                                            <div class="form-floating">
+                                                <select class="form-select mb-3" aria-label="Default select example"
+                                                        name="rol_id">
+                                                    <option selected>Seleccione el rol</option>
+                                                    @foreach($roles as $rol)
+                                                        <option value="{{ $rol->id }}">{{ $rol->nombre }}</option>
+                                                    @endforeach
+                                                </select>
+                                                <label for="rol_id"><span class="text-danger">*</span>Rol</label>
+                                            </div>
+                                        </div>
+                                    @endif
 
                                     <div class="col-lg-12">
                                         <div class="text-end">
                                             <button type="submit" class="btn btn-primary">Guardar</button>
                                         </div>
                                     </div>
-                                </div>
-
+                                                 </div>
 
                             </form>
                         </div>
@@ -137,8 +152,9 @@
 
 @endsection
 @section('script')
+    <script src="{{ URL::asset('build/libs/cleave.js/cleave.min.js') }}"></script>
     <script src="{{ URL::asset('build/js/pages/form-validation.init.js') }}"></script>
-    <script src="{{ URL::asset('build/js/pages/form-wizard.init.js') }}"></script>
+    <script src="{{ URL::asset('build/js/pages/form-masks.init.js') }}"></script>
     <script src="{{ URL::asset('build/js/app.js') }}"></script>
     <script src="{{ URL::asset('build/libs/particles.js/particles.js') }}"></script>
 

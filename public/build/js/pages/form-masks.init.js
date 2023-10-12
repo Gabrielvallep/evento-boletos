@@ -21,8 +21,8 @@ if (document.querySelector("#cleave-date-format")) {
     });
 }
 
-if (document.querySelector("#cleave-time")) {
-    var cleaveTime = new Cleave('#cleave-time', {
+if (document.querySelector("#telefono")) {
+    var cleaveTime = new Cleave('#telefono', {
         time: true,
         timePattern: ['h', 'm', 's']
     });
@@ -77,6 +77,6 @@ if (document.querySelector("#cleave-prefix")) {
 if (document.querySelector("#cleave-phone")) {
     var cleaveBlocks = new Cleave('#cleave-phone', {
         delimiters: ['(', ')', '-'],
-        blocks: [0, 3, 3, 4]
+        blocks: [0, 3, 4, 4]
     });
 }

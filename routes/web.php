@@ -12,6 +12,4 @@ Route::post('/logout', [LoginController::class, 'logout'])->name('logout')->midd
 
 Route::get('/', [App\Http\Controllers\HomeController::class, 'root'])->name('home')->middleware('web');
 
-Route::post('/update-profile/{id}', [App\Http\Controllers\HomeController::class, 'updateProfile'])->name('updateProfile')->middleware('web');
-Route::post('/update-password/{id}', [App\Http\Controllers\HomeController::class, 'updatePassword'])->name('updatePassword')->middleware('web');
-
+Route::get('{any}', [App\Http\Controllers\HomeController::class, 'index'])->name('index');
