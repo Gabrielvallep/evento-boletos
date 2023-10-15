@@ -94,7 +94,7 @@ Dashboards
                 <div class="explore-place-bid-img">
                     <input type="hidden" class="form-control" id="'+ prodctData.id + '">
                     <div class="d-none">'+ prodctData.salesType + '</div>
-                    <img src="{{$event->url_imagen }}" alt="" class="card-img-top explore-img" />
+                    <img src="{{URL::asset('storage/img_eventos/' . $event->ruta_imagen )}}" alt="" class="card-img-top explore-img" />
                     <div class="bg-overlay"></div>
                     <div class="place-bid-btn">
                         <a href="#!" class="btn btn-success"><i class="ri-auction-fill align-bottom me-1"></i> Place Bid</a>

@@ -34,23 +34,11 @@
                 <li class="menu-title"><span> menu')
                     </span></li>
                 <li class="nav-item">
-                    <a class="nav-link menu-link" href="#sidebarDashboards" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="sidebarDashboards">
-                        <i class="mdi mdi-speedometer"></i> <span> dashboards
+                    <a class="nav-link menu-link" href="/"  role="button" aria-expanded="false" aria-controls="sidebarDashboards">
+                        <i class="mdi mdi-speedometer"></i> <span> Home
                         </span>
                     </a>
-                    <div class="collapse menu-dropdown" id="sidebarDashboards">
-                        <ul class="nav nav-sm flex-column">
-                            <li class="nav-item">
-                                <a href="dashboard-analytics" class="nav-link"> analytics
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="dashboard-crm" class="nav-link"> crm
-                                </a>
-                            </li>
 
-                        </ul>
-                    </div>
                 </li> <!-- end Dashboard Menu -->
                 @if(auth()->check() && auth()->user()->id_rol != 3)
                 <li class="nav-item">
@@ -60,39 +48,11 @@
                     </a>
                     <div class="collapse menu-dropdown" id="sidebarApps">
                         <ul class="nav nav-sm flex-column">
-                            <li class="nav-item">
+                         <!--   <li class="nav-item">
                                 <a href="tables-datatables" class="nav-link">DataTable</a>
-                            </li>
+                            </li>-->
                             <li class="nav-item">
                                 <a href="eventos.eventos" class="nav-link">Eventos</a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="#sidebarEmail" class="nav-link" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="sidebarEmail">
-                                     email
-                                </a>
-                                <div class="collapse menu-dropdown" id="sidebarEmail">
-                                    <ul class="nav nav-sm flex-column">
-                                        <li class="nav-item">
-                                            <a href="#" class="nav-link"> Eventos</a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a href="#sidebaremailTemplates" class="nav-link" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="sidebaremailTemplates">
-                                                 email-templates
-                                            </a>
-                                            <div class="collapse menu-dropdown" id="sidebaremailTemplates">
-                                                <ul class="nav nav-sm flex-column">
-                                                    <li class="nav-item">
-                                                        <a href="apps-email-basic" class="nav-link">  basic-action </a>
-                                                    </li>
-                                                    <li class="nav-item">
-                                                        <a href="apps-email-ecommerce" class="nav-link">  ecommerce-action </a>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        </li>
-                                    </ul>
-                                </div>
-
                             </li>
 
                         </ul>
