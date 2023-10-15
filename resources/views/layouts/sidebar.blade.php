@@ -53,7 +53,7 @@
                     </div>
                 </li> <!-- end Dashboard Menu -->
                 <li class="nav-item">
-                    <a class="nav-link menu-link" href="#sidebarApps" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="sidebarApps">
+                    <a class="nav-link menu-link" href="#" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="sidebarApps">
                         <i class="mdi mdi-view-grid-plus-outline"></i> <span> Gestion de eventos
                         </span>
                     </a>
@@ -63,13 +63,16 @@
                                 <a href="tables-datatables" class="nav-link">DataTable</a>
                             </li>
                             <li class="nav-item">
+                                <a href="eventos.eventos" class="nav-link">Eventos</a>
+                            </li>
+                            <li class="nav-item">
                                 <a href="#sidebarEmail" class="nav-link" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="sidebarEmail">
                                      email
                                 </a>
                                 <div class="collapse menu-dropdown" id="sidebarEmail">
                                     <ul class="nav nav-sm flex-column">
                                         <li class="nav-item">
-                                            <a href="apps-mailbox" class="nav-link"> mailbox</a>
+                                            <a href="#" class="nav-link"> Eventos</a>
                                         </li>
                                         <li class="nav-item">
                                             <a href="#sidebaremailTemplates" class="nav-link" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="sidebaremailTemplates">
