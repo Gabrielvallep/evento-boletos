@@ -11,12 +11,12 @@ use Illuminate\Database\Eloquent\Model;
 
 /**
  * Class Formato
- * 
+ *
  * @property int $id
  * @property string $nombre
  * @property int $descripcion
- * @property int $id_auditorio
- * 
+ * @property int $id_escenario
+ *
  * @property Auditorio $auditorio
  * @property Collection|Zona[] $zonas
  *
@@ -28,19 +28,19 @@ class Formato extends Model
 	public $timestamps = false;
 
 	protected $casts = [
-		'descripcion' => 'int',
-		'id_auditorio' => 'int'
+		'descripcion' => 'string',
+		'id_escenario' => 'int'
 	];
 
 	protected $fillable = [
 		'nombre',
 		'descripcion',
-		'id_auditorio'
+		'id_escenario'
 	];
 
 	public function auditorio()
 	{
-		return $this->belongsTo(Auditorio::class, 'id_auditorio');
+		return $this->belongsTo(Auditorio::class, 'id_escenario');
 	}
 
 	public function zonas()
