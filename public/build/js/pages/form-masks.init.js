@@ -21,8 +21,8 @@ if (document.querySelector("#cleave-date-format")) {
     });
 }
 
-if (document.querySelector("#telefono")) {
-    var cleaveTime = new Cleave('#telefono', {
+if (document.querySelector("#time_format12")) {
+    var cleaveTime = new Cleave('#time_format12', {
         time: true,
         timePattern: ['h', 'm', 's']
     });
@@ -74,9 +74,18 @@ if (document.querySelector("#cleave-prefix")) {
     });
 }
 
-if (document.querySelector("#cleave-phone")) {
-    var cleaveBlocks = new Cleave('#cleave-phone', {
+if (document.querySelector("#telefono")) {
+    var cleaveBlocks = new Cleave('#telefono', {
         delimiters: ['(', ')', '-'],
-        blocks: [0, 3, 4, 4]
+        blocks: [0, 3, 4, 4],
+        numericOnly: true
     });
 }
+if (document.querySelector("#dui")) {
+    var cleaveBlocks = new Cleave('#dui', {
+        delimiters: ['-'],
+        blocks: [8, 1],
+        numericOnly: true
+    });
+}
+

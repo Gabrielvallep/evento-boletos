@@ -18,6 +18,8 @@ return new class extends Migration
             $table->string('evento', 200);
             $table->date('fecha');
             $table->integer('capacidad')->nullable();
+            $table->integer('estado');
+            $table->string('ruta_imagen', 200)->nullable();
         });
     }
 

@@ -16,7 +16,8 @@ use Illuminate\Database\Eloquent\Model;
  * @property int $id
  * @property string $evento
  * @property Carbon $fecha
- * @property int|null $capacidad
+ * @property int $estado
+ * @property string $ruta_imagen
  * @property int|null $id_evento_zona
  *
  * @property Collection|Boleto[] $boletos
@@ -38,7 +39,8 @@ class Evento extends Model
 	protected $fillable = [
 		'evento',
 		'fecha',
-		'capacidad'
+        'ruta_imagen',
+		'estado',
 	];
 
 	public function evento_zonas()
