@@ -63,7 +63,7 @@
                     <label for="txtImagen">Imagen</label>
                     <input type="file" class="form-control" id="txtImagen" placeholder="Seleccione un formato">
                 </div>
-                <div class="form-group mt-2">
+                <div class="form-group mt-2" hidden>
                     <label for="sltEstado">Estado</label>
                     <select class="form-control" id="sltEstado" placeholder="Seleccione un estado">
                         <option value="1">Activo</option>
