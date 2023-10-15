@@ -40,7 +40,7 @@ class HomeController extends Controller
             ->join('zonas', 'zona_formato.id_zona', '=', 'zonas.id')
             ->where('evento.fecha', '>=', date('Y-m-d'))
             ->orderBy('evento.id', 'asc')
-            ->groupBy('evento.id')
+            ->groupBy('evento.id','evento.evento','evento.fecha','evento.capacidad','evento.ruta_imagen','evento.estado')
             ->select('evento.*', DB::raw('SUM(zonas.capacidad) as capacidad'))
             ->get();
 
