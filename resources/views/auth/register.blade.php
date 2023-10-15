@@ -40,9 +40,7 @@
                                                     <strong>{{ $message }}</strong>
                                                 </span>
                                             @enderror
-                                            <div class="invalid-feedback">
-                                                Por favor ingrese el nombre
-                                            </div>
+
                                             <label for="name"><span class="text-danger">*</span>Nombre</label>
                                         </div>
                                     </div>
@@ -56,9 +54,7 @@
                                                     <strong>{{ $message }}</strong>
                                                 </span>
                                             @enderror
-                                            <div class="invalid-feedback">
-                                                Por favor ingrese el correo
-                                            </div>
+
                                             <label for="name"><span class="text-danger">*</span>Email Address</label>
                                         </div>
                                     </div>
@@ -69,11 +65,11 @@
                                                    name="password" id="password" placeholder="Ingrese la contraseña"
                                                    required>
                                             @error('password')
-
+                                            <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
                                             @enderror
-                                            <div class="invalid-feedback">
-                                                Por favor ingrese la contraseña
-                                            </div>
+
                                             <label for="userpassword">Password <span
                                                     class="text-danger">*</span></label>
                                         </div>
@@ -120,13 +116,13 @@
                                         <div class="col-lg-6">
                                             <div class="form-floating">
                                                 <select class="form-select mb-3" aria-label="Default select example"
-                                                        name="rol_id">
+                                                        name="id_rol">
                                                     <option selected>Seleccione el rol</option>
                                                     @foreach($roles as $rol)
                                                         <option value="{{ $rol->id }}">{{ $rol->nombre }}</option>
                                                     @endforeach
                                                 </select>
-                                                <label for="rol_id"><span class="text-danger">*</span>Rol</label>
+                                                <label for="id_rol"><span class="text-danger">*</span>Rol</label>
                                             </div>
                                         </div>
                                     @endif

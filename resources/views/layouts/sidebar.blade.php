@@ -52,6 +52,7 @@
                         </ul>
                     </div>
                 </li> <!-- end Dashboard Menu -->
+                @if(auth()->check() && auth()->user()->id_rol != 3)
                 <li class="nav-item">
                     <a class="nav-link menu-link" href="#sidebarApps" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="sidebarApps">
                         <i class="mdi mdi-view-grid-plus-outline"></i> <span> Gestion de eventos
@@ -94,6 +95,26 @@
                         </ul>
                     </div>
                 </li>
+                @endif
+                @if(auth()->check() && auth()->user()->id_rol == 1)
+                <li class="nav-item">
+                    <a class="nav-link menu-link" href="#sidebarApps" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="sidebarApps">
+                        <i class="mdi mdi-account-box-multiple"></i> <span> Gestion de usuarios
+                        </span>
+                    </a>
+                    <div class="collapse menu-dropdown" id="sidebarApps">
+                        <ul class="nav nav-sm flex-column">
+                            <li class="nav-item">
+                                <a href="usuarios" class="nav-link">Motrar usuarios</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{{ route('register') }}" class="nav-link">Agregar usuarios</a>
+                            </li>
+
+                        </ul>
+                    </div>
+                </li>
+                @endif
             </ul>
         </div>
         <!-- Sidebar -->

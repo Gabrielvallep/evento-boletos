@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Evento;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
@@ -32,7 +33,11 @@ class HomeController extends Controller
 
     public function root()
     {
-        return view('index');
+
+        $events = Evento::where('fecha', '>=', date('Y-m-d'))->get();
+
+        return view('index', compact('events'));
+        //return view('index');
     }
 
     /*Language Translation*/
