@@ -31,7 +31,7 @@ ENV DB_CONNECTION=pgsql
 #ENV DB_DATABASE=postgres
 #ENV DB_USERNAME=postgres
 #ENV DB_PASSWORD=Admin2023
-#ENV APP_ENV=production
+ENV APP_ENV=production
 
 # Copy files
 COPY . .
