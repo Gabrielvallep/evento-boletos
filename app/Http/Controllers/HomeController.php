@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\User;
+use App\Models\Evento;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
 {
@@ -32,7 +33,19 @@ class HomeController extends Controller
 
     public function root()
     {
-        return view('index');
+
+       // $events = Evento::where('fecha', '>=', date('Y-m-d'))->get();
+        $events = Evento::join('evento_zona', 'evento.id', '=', 'evento_zona.id_evento')
+            ->join('zona_formato', 'evento_zona.id_zona_formato', '=', 'zona_formato.id')
+            ->join('zonas', 'zona_formato.id_zona', '=', 'zonas.id')
+            ->where('evento.fecha', '>=', date('Y-m-d'))
+            ->orderBy('evento.id', 'asc')
+            ->groupBy('evento.id','evento.evento','evento.fecha','evento.capacidad','evento.ruta_imagen','evento.estado')
+            ->select('evento.*', DB::raw('SUM(zonas.capacidad) as capacidad'))
+            ->get();
+
+        return view('index', compact('events'));
+        //return view('index');
     }
 
     /*Language Translation*/

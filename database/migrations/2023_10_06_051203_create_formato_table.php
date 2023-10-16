@@ -16,8 +16,8 @@ return new class extends Migration
         Schema::create('formato', function (Blueprint $table) {
             $table->integer('id', true);
             $table->string('nombre', 200);
-            $table->integer('descripcion');
-            $table->integer('id_auditorio')->index('formato_auditorio_id_auditorio_fk');
+            $table->string('descripcion',200);
+            $table->integer('id_escenario')->index('formato_escenario_id_escenario_fk');
         });
     }
 

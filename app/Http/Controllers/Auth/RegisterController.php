@@ -3,13 +3,15 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\Rol;
 use App\Models\Usuario;
 use App\Providers\RouteServiceProvider;
+use Illuminate\Http\Request;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
-
+use App\Http\Requests\UsuarioValidator;
 class RegisterController extends Controller
 {
     /*
@@ -32,7 +34,11 @@ class RegisterController extends Controller
      */
     protected $redirectTo = RouteServiceProvider::HOME;
 
-
+    public function showRegistrationForm()
+    {
+        $roles = Rol::all();
+        return view('auth.register', compact('roles'));
+    }
     /**
      * Create a new controller instance.
      *
@@ -42,13 +48,18 @@ class RegisterController extends Controller
     {
        //  $this->middleware('auth');
     }
+
     public function store(){
         $data = request()->all();
-        $usuario = $this->create($data);
+        $data['id_rol'] = $data['id_rol'] ?? 3;
+        $validator = new UsuarioValidator();
+        $errors = $validator->validate($data);
 
-        if (Auth::check()) {
-            return redirect('/');
-        } else {
+        if ($errors->count()) {
+            return response()->json($errors, 422);
+        }
+        $usuario = $this->create($data);
+        if (!Auth::check()) {
             Auth::login($usuario);
         }
         return redirect('/');
@@ -65,27 +76,26 @@ class RegisterController extends Controller
             'nombre' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
-            'dui' => ['required', 'string', 'max:10'],
-            'telefono' => ['required', 'string', 'max:9'],
-
+            'dui' => ['required', 'string'],
+            'telefono' => ['required', 'string'],
         ]);
     }
 
     /**
      * Create a new user instance after a valid registration.
      *
-     * @param  array  $data
+     * @param  Request  $data
      * @return Usuario
      */
-    protected function create(array $data): Usuario
+    protected function create(Request $data): Usuario
     {
-        return Usuario::create([
+         return Usuario::create([
             'nombre' => $data['nombre'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
             'dui' => $data['dui'],
             'telefono' => $data['telefono'],
-            'id_rol' => '1',
+            'id_rol' => $data['rol_id'],
         ]);
     }
 }
