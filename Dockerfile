@@ -44,7 +44,7 @@ RUN composer install
 # Run commands
 RUN php artisan config:cache
 RUN php artisan route:cache
-RUN php artisan migrate --force
+## RUN php artisan migrate --force
 
 # Exponse port
 EXPOSE 80
