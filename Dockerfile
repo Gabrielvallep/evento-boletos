@@ -21,15 +21,15 @@ RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local
 WORKDIR /var/www/html
 
 # Set environment variables
-# ENV DATABASE_URL=postgres://igfevents:QG7APKFuzzGeltQIgUS6AwG39YP0OazF@dpg-ckm84i0710pc7380vbqg-a.oregon-postgres.render.com/igfevents
+ENV DATABASE_URL=postgres://igfevents:QG7APKFuzzGeltQIgUS6AwG39YP0OazF@dpg-ckm84i0710pc7380vbqg-a.oregon-postgres.render.com/igfevents
 ENV APP_KEY=base64:3lUj/ZNpIIox/dKQO5cslz/GLOZR3sUtDnK5DdJQhyU=
 ENV DB_CONNECTION=pgsql
-ENV DB_HOST=localhost
-ENV DB_PORT=5432
-ENV DB_DATABASE=postgres
-ENV DB_USERNAME=postgres
-ENV DB_PASSWORD=Admin2023
-ENV APP_ENV=production
+#ENV DB_HOST=localhost
+#ENV DB_PORT=5432
+#ENV DB_DATABASE=postgres
+#ENV DB_USERNAME=postgres
+#ENV DB_PASSWORD=Admin2023
+#ENV APP_ENV=production
 
 # Copy files
 COPY . .
