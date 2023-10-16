@@ -2,7 +2,8 @@
 FROM php:8-fpm
 
 # install dependecies
-RUN apt-get update && apt-get install -y libpng-dev libjpeg-dev libfreetype6-dev zip unzip
+## RUN apt-get update && apt-get install -y libpng-dev libjpeg-dev libfreetype6-dev zip unzip
+RUN apt-get update && apt-get install -y libpng-dev libjpeg-dev libfreetype6-dev zip unzip nginx
 
 # enable extensions for php
 RUN docker-php-ext-configure gd --with-freetype --with-jpeg \
@@ -35,7 +36,9 @@ RUN php artisan config:cache
 RUN php artisan route:cache
 RUN php artisan migrate --force
 
-# Exponse port
-EXPOSE 9000
+COPY nginx.conf /etc/nginx/sites-available/default
 
-CMD ["php-fpm"]
+# Exponse port
+EXPOSE 80
+
+CMD ["nginx"]
