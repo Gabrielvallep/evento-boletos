@@ -1,9 +1,11 @@
 # Using PHP 8
-FROM php:8-fpm
+FROM php:8.2-apache
+
+RUN a2enmod rewrite
 
 # install dependecies
 ## RUN apt-get update && apt-get install -y libpng-dev libjpeg-dev libfreetype6-dev zip unzip
-RUN apt-get update && apt-get install -y libpng-dev libjpeg-dev libfreetype6-dev zip unzip nginx
+RUN apt-get update && apt-get install -y libpng-dev libjpeg-dev libfreetype6-dev zip unzip
 
 # enable extensions for php
 RUN docker-php-ext-configure gd --with-freetype --with-jpeg \
@@ -34,6 +36,8 @@ ENV DB_CONNECTION=pgsql
 # Copy files
 COPY . .
 
+RUN chmod -R 755 /var/www/html
+
 # Install composer dependencies
 RUN composer install
 
@@ -42,9 +46,12 @@ RUN php artisan config:cache
 RUN php artisan route:cache
 RUN php artisan migrate --force
 
-COPY nginx.conf /etc/nginx/sites-available/default
-
 # Exponse port
 EXPOSE 80
+EXPOSE 443
+EXPOSE 8000
 
-CMD ["nginx"]
+RUN php /var/www/html/artisan serve --host=0.0.0.0 &
+
+CMD ["php", "artisan", "serve", "--host=0.0.0.0"]
+# ENTRYPOINT ["apache2-foreground"]
