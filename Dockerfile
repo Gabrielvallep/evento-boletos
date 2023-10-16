@@ -51,7 +51,7 @@ EXPOSE 80
 EXPOSE 443
 EXPOSE 8000
 
-RUN php /var/www/html/artisan serve --host=0.0.0.0 &
+# RUN php /var/www/html/artisan serve --host=0.0.0.0 &
 
 CMD ["php", "artisan", "serve", "--host=0.0.0.0"]
 # ENTRYPOINT ["apache2-foreground"]
