@@ -36,11 +36,10 @@ class HomeController extends Controller
 
        // $events = Evento::where('fecha', '>=', date('Y-m-d'))->get();
         $events = Evento::join('evento_zona', 'evento.id', '=', 'evento_zona.id_evento')
-            ->join('zona_formato', 'evento_zona.id_zona_formato', '=', 'zona_formato.id')
-            ->join('zonas', 'zona_formato.id_zona', '=', 'zonas.id')
+            ->join('zonas', 'evento_zona.id_zona', '=', 'zonas.id')
             ->where('evento.fecha', '>=', date('Y-m-d'))
             ->orderBy('evento.id', 'asc')
-            ->groupBy('evento.id','evento.evento','evento.fecha','evento.capacidad','evento.ruta_imagen','evento.estado')
+            ->groupBy('evento.id','evento.evento','evento.fecha','evento.ruta_imagen')
             ->select('evento.*', DB::raw('SUM(zonas.capacidad) as capacidad'))
             ->get();
 
