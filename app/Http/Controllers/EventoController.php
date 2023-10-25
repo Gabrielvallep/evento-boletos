@@ -16,9 +16,18 @@ class EventoController extends Controller
     public function index(Request $request)
     {
         if($request->ajax()){
-            return datatables()->of(DB::select("SELECT DISTINCT e.id, e.evento, f.nombre AS formato,e.fecha,e.ruta_imagen,f.id as id_formato,e.estado FROM evento e LEFT JOIN evento_zona ez ON e.id = ez.id_evento LEFT JOIN zona_formato zf ON ez.id_zona_formato = zf.id LEFT JOIN zonas z ON zf.id_zona = z.id LEFT JOIN  formato f ON zf.id_formato = f.id WHERE e.estado = 1"))
+            return datatables()->of(DB::select("SELECT DISTINCT
+            e.id,
+            e.evento,
+            f.nombre AS formato,
+            DATE(e.fecha) AS fecha,
+            e.ruta_imagen,
+            f.id as id_formato,
+            f.nombre
+        FROM evento e
+        INNER JOIN formato f on e.id_formato = f.id"))
             ->addColumn('action', function($row){
-                $button = '<button type="button" name="edit" onclick="editarEvento('.$row->id.', \''.$row->evento.'\', \''.$row->fecha.'\', \''.$row->id_formato.'\', \''.$row->estado.'\')"  class="edit btn btn-primary" title="Editar"><i class="mdi mdi-pencil"></i></button>';
+                $button = '<button type="button" name="edit" onclick="editarEvento('.$row->id.', \''.$row->evento.'\', \''.$row->fecha.'\', \''.$row->id_formato.'\')"  class="edit btn btn-primary" title="Editar"><i class="mdi mdi-pencil"></i></button>';
                 $button .= '&nbsp;&nbsp;&nbsp;<button type="button" name="delete" onclick=deshabilitarEvento("'.$row->id.'") class="delete btn btn-danger" title="Deshabilitar"><i class="mdi mdi-toggle-switch-off"></i></button>';
                 return $button;
             })
@@ -38,9 +47,10 @@ class EventoController extends Controller
         if($request->operacion == 'agregar'){
             $datos_zonas = json_decode($request->zonas);
             //exit("Si es para guardar");
+
             $evento->evento = $request->evento;
             $evento->fecha = $request->fecha;
-            $evento->estado = $request->estado;
+            $evento->id_formato = $request->formato;
             $evento->save();
 
             $idInsertado = $evento->id;//Obtener el id generado del registro insertado
@@ -49,7 +59,7 @@ class EventoController extends Controller
             foreach ($datos_zonas as $zona){
                 $evento_zona = new EventoZona;
                 $evento_zona->id_evento = $idInsertado;
-                $evento_zona->id_zona_formato = $zona->id_zona_formato;
+                $evento_zona->id_zona = $zona->id_zona;
                 $evento_zona->precio = $zona->precio;
                 $evento_zona->save();
             }
@@ -67,7 +77,7 @@ class EventoController extends Controller
             $evento = Evento::find($request->id);
             $evento->evento = $request->evento;
             $evento->fecha = $request->fecha;
-            $evento->estado = $request->estado;
+            $evento->id_formato = $request->formato;
 
             //Validar si han insertado una imagen nueva
             if ($request->hasFile('imagen')) {
@@ -90,9 +100,8 @@ class EventoController extends Controller
                 foreach ($datos_zonas as $zona){
                     $evento_zona = new EventoZona;
                     $evento_zona->id_evento = $request->id;
-                    $evento_zona->id_zona_formato = $zona->id_zona_formato;
+                    $evento_zona->id_zona = $zona->id_zona;
                     $evento_zona->precio = $zona->precio;
-                    //exit($evento_zona->id_zona_formato);
                     $evento_zona->save();
                 }
             }
@@ -114,15 +123,14 @@ class EventoController extends Controller
         $idFormato = $request->id_formato;
         $idEvento = $request->id_evento;
         return response()->json(DB::select("select
-            zonas.id as idz,
-            zonas.nombre,
-            zf.id as idzf,
-            IFNULL((select ez.precio from evento_zona ez where ez.id_zona_formato = zf.id and ez.id_evento=$idEvento),0) as precio,
-            IFNULL((select ez.id from evento_zona ez where ez.id_zona_formato = zf.id and ez.id_evento=$idEvento),0) as id_evento_zona
-        from zonas
-        inner join zona_formato zf on zonas.id = zf.id_zona
-        inner join formato f on zf.id_formato = f.id
-        where f.id=$idFormato"));
+            z.id as idz,
+            z.nombre,
+            #ez.precio,
+            (select precio from evento_zona where id_evento=$idEvento and id_zona = z.id) as precio
+            #ez.id as id_evento_zona
+        from zonas z
+        left join zona_formato zf on z.id = zf.id_zona
+        where zf.id_formato=$idFormato"));
     }
 
     public function eliminarEventoZona(Request $request){

@@ -41,6 +41,7 @@ class HomeController extends Controller
             ->orderBy('evento.id', 'asc')
             ->groupBy('evento.id','evento.evento','evento.fecha','evento.ruta_imagen')
             ->select('evento.*', DB::raw('SUM(zonas.capacidad) as capacidad'))
+            ->groupBy('evento.id_formato')
             ->get();
 
         return view('index', compact('events'));
