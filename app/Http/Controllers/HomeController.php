@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\User;
+use App\Models\Usuario;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -56,7 +56,7 @@ class HomeController extends Controller
             'avatar' => ['nullable', 'image', 'mimes:jpg,jpeg,png', 'max:1024'],
         ]);
 
-        $user = User::find($id);
+        $user = Usuario::find($id);
         $user->name = $request->get('name');
         $user->email = $request->get('email');
 
@@ -102,7 +102,7 @@ class HomeController extends Controller
                 'Message' => "Your Current password does not matches with the password you provided. Please try again."
             ], 200); // Status code
         } else {
-            $user = User::find($id);
+            $user = Usuario::find($id);
             $user->password = Hash::make($request->get('password'));
             $user->update();
             if ($user) {
